@@ -1,6 +1,5 @@
 package edu.umuc.cmsc495.trackit.controllers;
 
-import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +25,8 @@ public class LoginController {
         return "login";
     }
     
-    @RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
-    public String loginSuccess(ModelMap map, Principal principal) {
-        String name = principal.getName();
-        map.addAttribute("username", name);
-        // Must return name of file (minus .jsp) under /views
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginSuccess(ModelMap map) {
         return "inventory";
     }
     
