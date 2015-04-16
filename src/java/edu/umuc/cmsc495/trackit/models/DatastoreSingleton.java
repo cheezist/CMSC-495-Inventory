@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.models;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used to store all data, every set method should write to disk.
@@ -12,7 +10,12 @@ package edu.umuc.cmsc495.trackit.models;
 public class DatastoreSingleton {
     
     private DatastoreSingleton() {
+        logins = new ArrayList<>();
+        
+        logins.add(new Login("Admin", "Admin", "admin@admin.com"));
     }
+    
+    private List<Login> logins;
     
     public static DatastoreSingleton getInstance() {
         return DatastoreSingletonHolder.INSTANCE;
@@ -21,4 +24,19 @@ public class DatastoreSingleton {
     private static class DatastoreSingletonHolder {
         private static final DatastoreSingleton INSTANCE = new DatastoreSingleton();
     }
+    
+    
+    public static List<Login> getAllLogins() {
+        return getInstance().logins;
+    }
+    
+    public static void addLogin(Login login) {
+        getInstance().logins.add(login);
+    }
+    
+    public static void removeLogin(Login login) {
+        getInstance().logins.remove(login);
+    }
+    
+    
 }
