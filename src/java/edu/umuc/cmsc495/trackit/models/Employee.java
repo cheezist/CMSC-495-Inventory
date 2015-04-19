@@ -1,5 +1,4 @@
 package edu.umuc.cmsc495.trackit.models;
-import edu.umuc.cmsc495.trackit.models.Department;
 
 public class Employee {
     
