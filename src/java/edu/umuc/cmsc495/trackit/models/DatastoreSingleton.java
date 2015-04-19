@@ -1,5 +1,7 @@
 package edu.umuc.cmsc495.trackit.models;
 
+//import java.util.Map;
+//import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,11 @@ public class DatastoreSingleton {
         logins.add(new Login("Admin", "Admin", "admin@admin.com"));
     }
     
+    //We should change this to a HashMap if we have time.
+    //It's lookup is constant O(1) vs O(n) for List.
+    //private HashMap<email, Employee> logins;
+    //Email should be enforced to be unique already so a hash should have very few collisions.
+    //We want to return the username once we've found it.
     private List<Login> logins;
     
     public static DatastoreSingleton getInstance() {
