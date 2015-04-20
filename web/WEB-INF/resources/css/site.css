@@ -1,13 +1,31 @@
 /* 
     Created on : Apr 13, 2015, 8:35:15 PM
-    Author     : Christian
+    Updated on : Apr 19, 2015, 7:56:00 PM
+    Author     : Denise Rivers
 */
+
+/** Whole page body **/
+body.login-page {
+    background-color: #999999;
+}
+
+/** Login Page **/
+.row-above-login {
+    background-color: #999999;
+    height: 5em;
+}
+.login-container .jumbotron {
+    background-color: white;
+}
 
 
 /** Navbar content **/
 .navbar {
     margin-bottom: 25px;
     border-radius: 0;
+    background-color: #999999;
+    border-color: #999999;
+    background-image: none;
 }
 .navbar-inverse .navbar-brand {
     font-size: 2.4em;
