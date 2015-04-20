@@ -10,6 +10,7 @@
 
 <%-- The list of normal or fragment attributes can be specified here: --%>
 <%@attribute name="title" required="true"%>
+<%@attribute name="bodyClass" %>
  
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
         <link rel="stylesheet" type="text/css" href="${cp}/resources/css/site.css" />
     </head>
 
-    <body>
+    <body class="${bodyClass}">
         
         <jsp:doBody/>
         
