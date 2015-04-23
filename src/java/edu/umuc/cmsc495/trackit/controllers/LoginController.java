@@ -27,22 +27,17 @@ public class LoginController {
     public String login(@RequestParam("username") String username, 
             @RequestParam("password") String password, ModelMap map) {
         
-        // Getting all Logins
-        boolean authenticated = false;
-        List<Login> allLogins = DatastoreSingleton.getAllLogins();
-        for(Login login : allLogins) {
-            if (login.getUsername().equals(username) && 
-                login.getPassword().equals(password)) {
-                authenticated = true;
-                break;
-            }
-        }
+        // Finding user by their credentials
+        Login login = DatastoreSingleton.getLoginByCredentials(username, password);
+        boolean authenticated = (login != null);
         
         if (authenticated) {
+            // Authenticated gets redirected to the home page
             map.addAttribute("from", "login");
             map.addAttribute("msg", "Thanks for signing in!");
             return "redirect:home";
         } else {
+            // No authentication exists, refreshing page with error
             map.addAttribute("msg", "Incorrect username or password, please try again!");
             return "login";
         }

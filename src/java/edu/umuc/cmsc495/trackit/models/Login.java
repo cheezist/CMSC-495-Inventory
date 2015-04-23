@@ -1,5 +1,7 @@
 package edu.umuc.cmsc495.trackit.models;
 
+import java.util.Date;
+
 /**
  *
  * @author Christian
@@ -7,15 +9,31 @@ package edu.umuc.cmsc495.trackit.models;
 public class Login {
     
     private String username;
-
     private String password;
-    
     private String email;
+    private Date lastLogin;
     
-    public Login(String username, String password, String email) {
+    public Login(String username, String password, String email, Date lastLogin) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.lastLogin = lastLogin;
+    }
+
+    /**
+     * Get the last logged in date
+     * @return Date
+     */
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    /**
+     * Set the last login date
+     * @param lastLogin 
+     */
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
     /**
@@ -72,6 +90,14 @@ public class Login {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Username: %s, Email: %s, Last Login: %s", 
+                username,
+                email,
+                lastLogin);
     }
 
     
