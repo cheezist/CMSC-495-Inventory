@@ -55,7 +55,7 @@
         <div class="col-md-4">
 
             <h4>Current Users</h4>
-${logins}
+
             <table  class="table table-condensed">
                 <tr>
                     <th>Username</th>
