@@ -4,10 +4,10 @@
     Author     : Christian
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cp" value="${pageContext.request.servletContext.contextPath}" scope="request" />
 
 <t:body-container title="Track IT - Home">
@@ -61,15 +61,15 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Last seen</th>
-                </tr>
-                <c:forEach items="${logins}" var="user">
+                </tr>                
+                <c:forEach items="${users}" var="user" varStatus="status">
                 <tr>
                     <td>${user.username}</td>
                     <td><a href="mailto:${user.email}">${user.email}</a></td>
                     <fmt:formatDate value="${user.lastLogin}" 
                                     var="lastLoginFormatted"  
                                     type="date" 
-                                    pattern="MM-dd-yyyy" />
+                                    pattern="MM/dd/yyyy" />
                     <td>${lastLoginFormatted}</td>
                 </tr>
                 </c:forEach>

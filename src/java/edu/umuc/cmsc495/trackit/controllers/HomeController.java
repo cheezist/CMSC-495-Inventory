@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.ModelAndView;
 
 /**
@@ -24,13 +23,12 @@ import org.springframework.web.portlet.ModelAndView;
 public class HomeController {
     
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView home(
-            @RequestParam(value="from", defaultValue="", required=false) String from, 
-            @RequestParam(value="msg", defaultValue="", required=false) String msg, 
-            ModelMap map) {
+    public String home(ModelMap map) {
         // Must return name of file (minus .jsp) under /views
-        List<Login> logins = DatastoreSingleton.getAllLogins();
-        return new ModelAndView("home", "logins", logins);
+        List<Login> users = DatastoreSingleton.getAllLogins();
+        map.addAttribute("test", "test message");
+        map.addAttribute("users", users);
+        return "home";
     }
     
 }
