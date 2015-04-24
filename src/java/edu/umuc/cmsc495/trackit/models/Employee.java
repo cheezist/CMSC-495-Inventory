@@ -8,11 +8,11 @@ public class Employee {
     private int ID;
     private Department department;
     
-    public Employee(String f_name, String l_name, int iD, Department department) {
+    public Employee(String f_name, String l_name, int iD, int dept) {
         this.f_name = f_name;
         this.l_name = l_name;
         this.ID = iD;
-        this.department = department;
+        this.department = new Department(dept);
     }
     
     public String getF_name() {
@@ -36,15 +36,15 @@ public class Employee {
     }
     
     public void setID(int iD) {
-        ID = iD;
+        this.ID = iD;
     }
     
     public Department getDepartment() {
         return department;
     }
     
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment(int dept) {
+        this.department = new Department(dept);
     }
     
     public String getPhoneNumber() {

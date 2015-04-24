@@ -2,18 +2,21 @@ package edu.umuc.cmsc495.trackit.models;
 
 public class Department {
     
-    private String dept_name;
+    private enum DeptName {IT, HUMAN_RESOURCES, ACCOUNTING, OPERATIONS, PUBLIC_RELATIONS}
+    private String deptName;
     
-    public Department(String dept_name) {
-        this.setDept_name(dept_name);
+    private final DeptName[] names = DeptName.values();
+    
+    public Department(int dept_name) {
+        setDeptName(dept_name);
     }
 
-    public String getDept_name() {
-        return dept_name;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setDept_name(String dept_name) {
-        this.dept_name = dept_name;
+    private void setDeptName(int dept_name) {
+        this.deptName = names[dept_name].name();
     }
     
 }

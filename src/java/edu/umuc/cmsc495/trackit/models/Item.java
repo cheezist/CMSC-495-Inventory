@@ -1,38 +1,45 @@
 package edu.umuc.cmsc495.trackit.models;
 
+import java.time.LocalDateTime;
+
 public class Item {
     
-    private String itemType;
-    private String itemName;
+    /**
+     *
+     */
+    public enum Type {TOWER, MONITOR, KEYBOARD, MOUSE, PRINTER }
+    
+    private final Type[] types = Type.values();
+    private final String itemType;
+    //Deleted itemName
     private String serialNumber;
     private String make;
     private String model;
     private String location;
     private Employee point_of_contact;
     private Department owner;
+    private final LocalDateTime dateEntered;
     
-    public Item(String itemType, String item_name, String location, Employee employee, Department owner) {
-        this.itemType = itemType;
-        this.itemName = item_name;
+    /**
+     * @param item_Type
+     * @param location
+     * @param p_o_c
+     * @param dateEntered
+     * @param deptOwner
+     */
+    public Item(int item_Type, String location, Employee p_o_c, int deptOwner, LocalDateTime dateEntered) {
+        this.itemType = types[item_Type].name();
         this.location = location;
-        this.point_of_contact = employee;
-        this.owner = owner;
+        this.point_of_contact = p_o_c;
+        this.owner = new Department(deptOwner);
+        this.dateEntered = dateEntered;
     }
     
+    /**
+     * @return
+     */
     public String getItemType() {
         return itemType;
-    }
-    
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
-    }
-    
-    public String getItemName() {
-        return itemName;
-    }
-    
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
     }
     
     public String getSerialNumber() {
@@ -59,14 +66,6 @@ public class Item {
         this.model = model;
     }
     
-    public String getItem_name() {
-        return itemName;
-    }
-    
-    public void setItem_name(String item_name) {
-        this.itemName = item_name;
-    }
-    
     public String getLocation() {
         return location;
     }
@@ -83,12 +82,15 @@ public class Item {
         this.point_of_contact = point_of_contact;
     }
     
-    public Department getOwner() {
-        return owner;
+    public String getOwner() {
+        return owner.getDeptName();
     }
     
     public void setOwner(Department owner) {
         this.owner = owner;
     }
     
+    public LocalDateTime getDateEntered(){
+        return dateEntered;
+    }
 }
