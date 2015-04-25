@@ -97,7 +97,7 @@ public class DatastoreSingleton {
         getInstance().logins.remove(login);
     }
     
-   public static void addItem(Item item) {
+    public static void addItem(Item item) {
         getInstance().items.add(item);
     }
     
