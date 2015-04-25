@@ -6,9 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.servletContext.contextPath}" scope="request" />
  
-<t:body-container title="Track IT - Reset Password">
+<t:body-container title="Track IT - Reset Password" bodyClass="login-page">
     
         
         <span class="col-lg-2"></span>
@@ -23,7 +24,7 @@
                 
                 <p class="lead text-center">Enter your email to receive a new password</p>
                 
-                <form action="${cp}/login-reset" method="post" id="loginForm" name="loginForm">
+                <form action="${cp}/login/reset" method="post" id="loginForm" name="loginForm">
                     
                     <div class="form-group container-fluid">
                         <span class="col-lg-4">
