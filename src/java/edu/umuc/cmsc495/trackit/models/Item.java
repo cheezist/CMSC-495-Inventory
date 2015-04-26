@@ -1,30 +1,33 @@
 package edu.umuc.cmsc495.trackit.models;
+import java.util.Date;
 
 public class Item {
     
-    private String itemType;
+    private String model;
+    private String description;
     private String itemName;
     private String serialNumber;
     private String make;
-    private String model;
     private String location;
+    private Integer quantity;
     private Employee point_of_contact;
     private Department owner;
-    
-    public Item(String itemType, String item_name, String location, Employee employee, Department owner) {
-        this.itemType = itemType;
-        this.itemName = item_name;
-        this.location = location;
-        this.point_of_contact = employee;
-        this.owner = owner;
+    private Date made;
+        
+    public Item(String model, String make, Date made, Integer quantity, String description) {
+        this.model = model;
+        this.make = make;
+        this.made = made;
+        this.quantity = quantity;
+        this.description = description;
     }
     
-    public String getItemType() {
-        return itemType;
+    public String getModel() {
+        return model;
     }
     
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
+    public void setModel(String model) {
+        this.model = model;
     }
     
     public String getItemName() {
@@ -50,15 +53,7 @@ public class Item {
     public void setMake(String make) {
         this.make = make;
     }
-    
-    public String getModel() {
-        return model;
-    }
-    
-    public void setModel(String model) {
-        this.model = model;
-    }
-    
+        
     public String getItem_name() {
         return itemName;
     }
@@ -89,6 +84,28 @@ public class Item {
     
     public void setOwner(Department owner) {
         this.owner = owner;
+    }
+    public Date getMade() {
+        return made;
+    }
+
+    public void setMade(Date made) {
+        this.made = made;
+    }
+    public Integer getQuantity() {
+        return quantity;
+    }
+    
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }

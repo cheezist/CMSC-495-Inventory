@@ -15,6 +15,7 @@ public class DatastoreSingleton {
     
     private DatastoreSingleton() {
         logins = new ArrayList<>();
+        item = new ArrayList<>();
         
         Calendar calendar = new GregorianCalendar();
         calendar.set(2011, 6, 16, 10, 12);
@@ -25,6 +26,23 @@ public class DatastoreSingleton {
         logins.add(new Login("user1", "user1", "user1@user1.com", calendar.getTime()));
         calendar.set(2014, 10, 1, 4, 49);
         logins.add(new Login("user2", "user2", "user2@user2.com", calendar.getTime()));
+        
+        calendar.set(2015, 1, 15, 3, 24);
+        item.add(new Item("ASUS","Chromebook", calendar.getTime(), 6, "Silver laptop/ultrabook that runs the Chrome OS."
+                + "Used for simple web browsing and testing of pages. Very stable but not recommended as a development "
+                + "or word processing machine"));
+        calendar.set(2014, 0, 24, 3, 24);
+        item.add(new Item("Dell","Latitude E6530", calendar.getTime(), 10, ""));
+        calendar.set(2012, 8, 15, 3, 24);
+        item.add(new Item("Dell","22 inch Monitor", calendar.getTime(), 5, ""));
+        calendar.set(2013, 3, 26, 3, 24);
+        item.add(new Item("Dell","WebCam", calendar.getTime(), 3, ""));
+        calendar.set(2010, 6, 07, 3, 24);
+        item.add(new Item("Logitech","Ergo Mouse", calendar.getTime(), 23, ""));
+        calendar.set(2014, 10, 14, 3, 24);
+        item.add(new Item("Apple","Macbook", calendar.getTime(), 1, ""));
+        
+        
     }
     
     //We should change this to a HashMap if we have time.
@@ -33,6 +51,7 @@ public class DatastoreSingleton {
     //Email should be enforced to be unique already so a hash should have very few collisions.
     //We want to return the username once we've found it.
     private List<Login> logins;
+    private List<Item> item;
     
     public static DatastoreSingleton getInstance() {
         return DatastoreSingletonHolder.INSTANCE;
@@ -45,6 +64,11 @@ public class DatastoreSingleton {
     
     public static List<Login> getAllLogins() {
         return getInstance().logins;
+    }
+   
+    public static List<Item> getAllItem() {
+        return getInstance().item;
+        
     }
     
     public static Login getLoginByCredentials(String username, String password) {
@@ -66,6 +90,14 @@ public class DatastoreSingleton {
     
     public static void removeLogin(Login login) {
         getInstance().logins.remove(login);
+    }
+    
+    public static void addItem(Item item) {
+        getInstance().item.add(item);
+    }
+    
+    public static void removeItem(Item item) {
+        getInstance().item.remove(item);
     }
     
     
