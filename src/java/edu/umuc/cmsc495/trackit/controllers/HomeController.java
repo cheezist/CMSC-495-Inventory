@@ -6,6 +6,7 @@
 package edu.umuc.cmsc495.trackit.controllers;
 
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
+import edu.umuc.cmsc495.trackit.models.Item;
 import edu.umuc.cmsc495.trackit.models.Login;
 import java.util.List;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,10 @@ public class HomeController {
     public String home(ModelMap map) {
         // Must return name of file (minus .jsp) under /views
         List<Login> users = DatastoreSingleton.getAllLogins();
+        List<Item> items = DatastoreSingleton.getAllItems();
         map.addAttribute("test", "test message");
         map.addAttribute("users", users);
+        map.addAttribute("items", items);
         return "home";
     }
     

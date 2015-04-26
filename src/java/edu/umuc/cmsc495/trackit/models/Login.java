@@ -13,6 +13,12 @@ public class Login {
     private String email;
     private Date lastLogin;
     
+    /**
+     * @param username
+     * @param password
+     * @param email
+     * @param lastLogin
+     */    
     public Login(String username, String password, String email, Date lastLogin) {
         this.username = username;
         this.password = password;

@@ -57,11 +57,13 @@
             <h4>Current Users</h4>
 
             <table  class="table table-condensed">
+                
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Last seen</th>
-                </tr>                
+                </tr> 
+                
                 <c:forEach items="${users}" var="user" varStatus="status">
                 <tr>
                     <td>${user.username}</td>
@@ -73,6 +75,21 @@
                     <td>${lastLoginFormatted}</td>
                 </tr>
                 </c:forEach>
+                
+                <tr>
+                    <th>Item Type</th>
+                    <th>Parent Dept.</th>
+                    <th>Date Received</th>
+                </tr> 
+                
+                <c:forEach items="${items}" var="item" varStatus="status">
+                <tr>
+                    <td>${item.itemType}</td>
+                    <td>${item.getOwner()}</td>
+                    <td>${item.dateEntered}</td>
+                </tr>
+                </c:forEach>
+                
             </table>
 
         </div>
