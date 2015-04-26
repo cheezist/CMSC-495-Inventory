@@ -47,6 +47,11 @@ body.login-page {
     text-decoration: underline;
 }
 
+/** Breadcrumbs **/
+.breadcrumb {
+    margin-top: -25px;
+    margin-bottom: 0px;
+}
 
 
 /** Home Icons **/
@@ -71,4 +76,15 @@ body.login-page {
 .icons-row .icon > a > span.glyphicon {
     font-size: 3em;
     display: block;
+}
+
+
+/** Inventory Search Form **/
+.search-form {
+    margin-bottom: 5px;
+}
+
+/** Item View Settings **/
+.view-heading {
+    text-align: right;
 }
