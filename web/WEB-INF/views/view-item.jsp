@@ -14,6 +14,7 @@
     
     <t:nav-bar iconClass="glyphicon glyphicon-home" username="${username}" />
     
+<<<<<<< HEAD
 
     <div class='container-fluid text-center'>
 
@@ -75,6 +76,153 @@
              </tr>
             </table>
         </div>
+=======
+    <ol class="breadcrumb">
+        <li><a href="${cp}/home">Home</a></li>
+        <li><a href="${cp}/inventory">Inventory</a></li>
+        <li class="active">View Item #${item.id}</li>
+    </ol>
+
+    <div class="container-fluid">
+        <h3>View Inventory Item</h3>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-10">
+            
+            <div class="row">
+                
+                <div class="col-md-2 view-heading">
+                    <strong>ID:</strong>
+                </div>
+                
+                <div class="col-md-3">
+                    ${item.id}
+                </div>
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Serial #:</strong>
+                </div>
+                
+                <div class="col-md-5">
+                    ${item.serialNumber}
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Make:</strong>
+                </div>
+                
+                <div class="col-md-3">
+                    ${item.make}
+                </div>
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Model:</strong>
+                </div>
+                
+                <div class="col-md-5">
+                    ${item.model}
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Description:</strong>
+                </div>
+                
+                <div class="col-md-10">
+                    ${item.description}
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Type:</strong>
+                </div>
+                
+                <div class="col-md-3">
+                    ${item.type}
+                </div>
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Quantity:</strong>
+                </div>
+                
+                <div class="col-md-5">
+                    ${item.quantity}
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Location:</strong>
+                </div>
+                
+                <div class="col-md-3">
+                    ${item.location}
+                </div>
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Contact:</strong>
+                </div>
+                
+                <div class="col-md-5">
+                    ${item.point_of_contact}
+                </div>
+                
+            </div>
+            
+            <div class="row">
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Made:</strong>
+                </div>
+                
+                <div class="col-md-3">
+                    ${item.made}
+                </div>
+                
+                <div class="col-md-2 view-heading">
+                    <strong>Entered:</strong>
+                </div>
+                
+                <div class="col-md-5">
+                    ${item.dateEntered}
+                    
+                    <c:if test="${item.dateModified != null}">
+                        &nbsp;&nbsp;(last modified - ${item.dateModified})
+                    </c:if>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="row text-center">
+                <p></p>
+                <a class="btn btn-info" href="${cp}/inventory/edit/${item.id}">Edit Item</a>
+                &nbsp;&nbsp;
+                <a class="btn btn-warning" href="${cp}/inventory/delete/${item.id}">Delete Item</a>
+                &nbsp;&nbsp;
+                <a class="btn btn-default" href="${cp}/inventory">View Inventory</a>
+            </div>
+            
+        </div>
+
+        <div class="col-md-1"></div>
+>>>>>>> e65eed8e48efbba429c992590abd19961a4ec15b
 
 
     </div>
