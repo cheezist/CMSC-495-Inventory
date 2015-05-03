@@ -1,7 +1,7 @@
 package edu.umuc.cmsc495.trackit.controllers;
 
-import edu.umuc.cmsc495.exceptions.InvalidLoginException;
-import edu.umuc.cmsc495.exceptions.LockedAccountException;
+import edu.umuc.cmsc495.trackit.exceptions.InvalidLoginException;
+import edu.umuc.cmsc495.trackit.exceptions.LockedAccountException;
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
 import edu.umuc.cmsc495.trackit.models.Login;
 import java.util.List;
@@ -24,8 +24,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class LoginController {
     
     @RequestMapping(method = RequestMethod.GET)
-    public String login(ModelMap map, HttpSession session) {
-        session.setAttribute("user-login", null);
+    public String login(
+            @RequestParam(required = false, value = "msg") String msg, 
+            ModelMap map, 
+            HttpSession session) {
+        session.setAttribute("userLogin", null);
+        if (msg != null) {
+            map.addAttribute("msg", msg);
+        }
         // Must return name of file (minus .jsp) under /views
         return "login";
     }
@@ -53,7 +59,7 @@ public class LoginController {
             map.addAttribute("from", "login");
             map.addAttribute("msg", "Thanks for signing in!");
             // Adding user's session
-            session.setAttribute("user-login", login);
+            session.setAttribute("userLogin", login);
             return "redirect:home";
         } else {
             // No authentication exists, refreshing page with error

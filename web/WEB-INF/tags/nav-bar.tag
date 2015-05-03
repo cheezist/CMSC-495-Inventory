@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-inverse">
 
-    <div class="container-fluid">
+    <div class="container">
 
         <div class="navbar-header">
             <span class="navbar-brand">MGSH Track-IT</span>
@@ -22,7 +22,8 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-right navbar-links">
-            <span class="navbar-signed-in">Signed in as: <span class="label label-default">${username}</span> | </span>
+            <span class="navbar-signed-in">Signed in as: 
+                <span class="label label-default"><c:out value="${sessionScope.userLogin.username}" /></span> | </span>
             <a href="${cp}/sign-out">Sign Out</a>
         </div>
         

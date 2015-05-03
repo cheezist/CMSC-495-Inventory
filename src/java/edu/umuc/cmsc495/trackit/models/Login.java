@@ -1,13 +1,13 @@
 package edu.umuc.cmsc495.trackit.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  *
  * @author Christian
  */
-public class Login {
+public class Login implements Serializable {
     
     
     public static final int MAX_LOGIN_ATTEMPTS = 5;

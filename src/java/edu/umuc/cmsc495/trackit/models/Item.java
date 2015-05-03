@@ -1,11 +1,8 @@
 package edu.umuc.cmsc495.trackit.models;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-public class Item {
+public class Item implements Serializable  {
     
     /**
      *
@@ -14,6 +11,10 @@ public class Item {
     
     private static int lastId = 0;
     
+    public static void setLastId (int last) {
+        lastId = last;
+    }
+    
     private int id;
     private Type type;
     private String make;
@@ -21,43 +22,52 @@ public class Item {
     private String description;
     private String serialNumber;
     private String location;
-    private Integer quantity;
-    private Employee point_of_contact;
+    private int contactEmplId;
     private Department owner;
-    private LocalDate made;
     private LocalDate dateEntered;
     private LocalDate dateModified;
+    
+    public Item() {
+    }
+    
+    public int incrementId() {
+        this.id = ++lastId;
+        this.dateEntered = LocalDate.now();
+        this.dateModified = LocalDate.now();
+        return this.id;
+    }
     
     /**
      * @param type What type of item is it?
      * @param make Who made it?
      * @param model What is the name?
-     * @param made When it was made?
      * @param description Have a description?
      * @param serialNumber What are the digits?
      * @param location Where is it?
-     * @param quantity How many exist?
-     * @param p_o_c Who takes care of it?
+     * @param pointOfContact Who takes care of it?
      * @param deptOwner Which department owns it?
      */
-    public Item(Type type, String make, String model, LocalDate made, 
-            String description, String serialNumber, int quantity,
-            String location, Employee p_o_c, Department deptOwner) {
+    public Item(Type type, String make, String model, 
+            String description, String serialNumber, 
+            String location, Employee pointOfContact, Department deptOwner) {
         
         // Setting the ID to the last ID +1, also incrementing last ID
         this.id = ++lastId;
         this.type = type;
         this.make = make;
         this.model = model;
-        this.made = made;
         this.description = description;
         this.serialNumber = serialNumber;
-        this.quantity = quantity;
         this.location = location;
-        this.point_of_contact = p_o_c;
+        if (pointOfContact != null) {
+            this.contactEmplId = pointOfContact.getId();
+        } else {
+            this.contactEmplId = -1;
+        }
         this.owner = deptOwner;
         
         this.dateEntered = LocalDate.now();
+        this.dateModified = LocalDate.now();
     }
 
     public int getId() {
@@ -67,8 +77,6 @@ public class Item {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
     
     /**
      * Get the value of itemType
@@ -80,6 +88,7 @@ public class Item {
     }
     public void setType(Type type) {
         this.type = type;
+        this.dateModified = LocalDate.now();
     }
     
     /**
@@ -98,6 +107,7 @@ public class Item {
      */
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+        this.dateModified = LocalDate.now();
     }
     
     /**
@@ -116,6 +126,7 @@ public class Item {
      */
     public void setMake(String make) {
         this.make = make;
+        this.dateModified = LocalDate.now();
     }
     
     /**
@@ -134,6 +145,7 @@ public class Item {
      */
     public void setModel(String model) {
         this.model = model;
+        this.dateModified = LocalDate.now();
     }
     
     /**
@@ -152,24 +164,43 @@ public class Item {
      */
     public void setLocation(String location) {
         this.location = location;
+        this.dateModified = LocalDate.now();
+    }
+
+    public int getContactEmplId() {
+        return contactEmplId;
+    }
+
+    public void setContactEmplId(int contactEmplId) {
+        this.contactEmplId = contactEmplId;
     }
     
+    
+    
     /**
-     * Get the value of point_of_contact
+     * Get the value of pointOfContact
      * 
-     * @return the value of point_of_contact
+     * @return the value of pointOfContact
      */
-    public Employee getPoint_of_contact() {
-        return point_of_contact;
+    public Employee getPointOfContact() {
+        Employee contact = null;
+        for(Employee employee : DatastoreSingleton.getAllEmployees()) {
+            if (employee.getId() == contactEmplId) {
+                contact = employee;
+                break;
+            }
+        }
+        return contact;
     }
     
     /**
-     * Set the value of point_of_contact
+     * Set the value of pointOfContact
      *
-     * @param point_of_contact new value of point_of_contact
+     * @param pointOfContact new value of pointOfContact
      */
-    public void setPoint_of_contact(Employee point_of_contact) {
-        this.point_of_contact = point_of_contact;
+    public void setPointOfContact(Employee pointOfContact) {
+        this.contactEmplId = pointOfContact.getId();
+        this.dateModified = LocalDate.now();
     }
     
     /**
@@ -188,20 +219,7 @@ public class Item {
      */
     public void setOwner(Department owner) {
         this.owner = owner;
-    }
-    public LocalDate getMade() {
-        return made;
-    }
-
-    public void setMade(LocalDate made) {
-        this.made = made;
-    }
-    public Integer getQuantity() {
-        return quantity;
-    }
-    
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+        this.dateModified = LocalDate.now();
     }
     
     public String getDescription() {
@@ -210,6 +228,7 @@ public class Item {
     
     public void setDescription(String description) {
         this.description = description;
+        this.dateModified = LocalDate.now();
     }
     
     /**

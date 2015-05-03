@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.umuc.cmsc495.exceptions;
+package edu.umuc.cmsc495.trackit.exceptions;
 
 /**
  *
  * @author Christian
  */
-public class InvalidLoginException extends Exception {
+public class LockedAccountException extends Exception {
 
     /**
-     * Creates a new instance of <code>InvalidLoginexception</code> without
+     * Creates a new instance of <code>LockedAccountException</code> without
      * detail message.
      */
-    public InvalidLoginException() {
+    public LockedAccountException() {
     }
 
     /**
-     * Constructs an instance of <code>InvalidLoginexception</code> with the
+     * Constructs an instance of <code>LockedAccountException</code> with the
      * specified detail message.
      *
      * @param msg the detail message.
      */
-    public InvalidLoginException(String msg) {
+    public LockedAccountException(String msg) {
         super(msg);
     }
 }

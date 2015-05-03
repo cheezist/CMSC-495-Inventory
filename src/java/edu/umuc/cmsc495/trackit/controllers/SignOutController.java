@@ -17,7 +17,7 @@ public class SignOutController {
     public String login(HttpSession session) {
         
         // Killing user's session
-        session.setAttribute("user-login", null);
+        session.setAttribute("userLogin", null);
         return "redirect:login";
         
     }

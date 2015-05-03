@@ -12,10 +12,10 @@
 
 <t:body-container title="Track IT - Home">
     
-    <t:nav-bar iconClass="glyphicon glyphicon-home" username="${login.username}" />
+    <t:nav-bar iconClass="glyphicon glyphicon-home" />
     
 
-    <div class='container-fluid text-center'>
+    <div class='container text-center'>
 
         <h3>Select a task from the options below:</h3>
 
@@ -29,7 +29,7 @@
             </div>
 
             <div class="icon">
-                <a href="${cp}/inventory/create">
+                <a href="${cp}/inventory/new">
                     <span class="glyphicon glyphicon-plus-sign"></span>
                     <span>Create Item</span>
                 </a>
@@ -94,16 +94,18 @@
                     <th>Make</th>
                     <th>Model</th>
                     <th>Type</th>
-                    <th>Quantity</th>
                     <th>Entered</th>
                 </tr> 
                 
                 <c:forEach items="${items}" var="item" varStatus="status">
                 <tr>
-                    <td>${item.make}</td>
-                    <td>${item.model}</td>
+                    <td>
+                        <a href="${cp}/inventory/view/${item.id}">${item.make}</a>
+                    </td>
+                    <td>
+                        <a href="${cp}/inventory/view/${item.id}">${item.model}</a>
+                    </td>
                     <td>${item.type}</td>
-                    <td>${item.quantity}</td>
                     <fmt:parseDate value="${item.dateEntered}"
                                    pattern="yyyy-MM-dd"
                                    var="parsedDate"

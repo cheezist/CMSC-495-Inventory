@@ -1,6 +1,8 @@
 package edu.umuc.cmsc495.trackit.models;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
     
     private static int lastId = 0;
     

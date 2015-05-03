@@ -1,91 +1,154 @@
 package edu.umuc.cmsc495.trackit.models;
 
-//import java.util.Map;
-//import java.util.HashMap;
-import edu.umuc.cmsc495.exceptions.InvalidLoginException;
-import edu.umuc.cmsc495.exceptions.LockedAccountException;
+import edu.umuc.cmsc495.trackit.exceptions.InvalidLoginException;
+import edu.umuc.cmsc495.trackit.exceptions.LockedAccountException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import org.springframework.format.datetime.joda.LocalDateParser;
 
 /**
  * Used to store all data, every set method should write to disk.
- * @author Christian
+ * @author Jacob Poage, Matthew Thompson, Denise Rivers, Christian Nickel
  */
 public class DatastoreSingleton {
     
-    
-    
-    private DatastoreSingleton() {
-        
-        logins = new ArrayList<>();
-        items = new ArrayList<>();
-        employees = new ArrayList<>();
-        
-        //Employee(String f_name, String l_name, int iD, Department department)
-        //Item(Type itemType, String location, Employee p_o_c, Department owner, LocalDateTime entered)
-        
-        // Adding some logins
-        logins.add(new Login("admin", "admin", "admin@admin.com", LocalDate.of(2011, Month.JUNE, 16)));
-        logins.add(new Login("guest", "guest", "guest@guest.com", LocalDate.of(2015, Month.APRIL, 24)));
-        logins.add(new Login("user1", "user1", "user1@user1.com", LocalDate.of(2014, Month.OCTOBER, 1)));
-        logins.add(new Login("user2", "user2", "user2@user2.com", LocalDate.of(2015, Month.NOVEMBER, 28)));
-        
-        // Adding some employees
-        Employee empCNickel = new Employee("Christian", "Nickel", Department.IT);
-        employees.add(empCNickel);
-        Employee empDRivers = new Employee("Denise", "Rivers", Department.IT);
-        employees.add(empDRivers);
-        Employee empMThompson = new Employee("Matt", "Thompson", Department.IT);
-        employees.add(empMThompson);
-        Employee empJPoage = new Employee("Jacob", "Poage", Department.IT);
-        employees.add(empJPoage);
-        
-        // Adding items
-        items.add(new Item(Item.Type.LAPTOP, "ASUS", "Chromebook", 
-                LocalDate.of(2015, Month.NOVEMBER, 28),
-                "Silver laptop/ultrabook "
-                + "that runs the Chrome OS."
-                + "Used for simple web browsing and testing of pages. Very stable but not recommended as a development "
-                + "or word processing machine", 
-                "2037196127371421571", 4, "On a desk", empCNickel, 
-                Department.IT));
-        items.add(new Item(Item.Type.LAPTOP, "Dell", "Latitude E6530", 
-               LocalDate.of(2014, Month.NOVEMBER, 28), "", 
-                "2037196127371421573", 10, "On a desk", empDRivers, 
-                Department.IT));
-        items.add(new Item(Item.Type.LAPTOP, "Dell", "22 inch Monitor", 
-                LocalDate.of(2013, Month.NOVEMBER, 28), "", 
-                "20371444441421573", 5, "On a few desks", empJPoage, 
-                Department.IT));
-        items.add(new Item(Item.Type.LAPTOP, "Dell", "WebCam", 
-                LocalDate.of(2012, Month.NOVEMBER, 28), "", 
-                "212323155177142341", 3, "On a few desks", empMThompson, 
-                Department.IT));
-        items.add(new Item(Item.Type.LAPTOP, "Logitech", "Ergo Mouse", 
-                LocalDate.of(2011, Month.NOVEMBER, 28), "", 
-                "83498200394879028", 23, "Somewhere", null, 
-                Department.NONE));
-        items.add(new Item(Item.Type.LAPTOP, "Apple", "Macbook", 
-                LocalDate.of(2010, Month.NOVEMBER, 28), "", 
-                "94529834759234741", 1, "Somewhere", null, 
-                Department.ACCOUNTING));
-		
-    }
+    private static final String LOGIN_FILENAME = "logins.dat";
+    private static final String ITEM_FILENAME = "items.dat";
+    private static final String EMPL_FILENAME = "employees.dat";
     
     private List<Login> logins;
     private List<Item> items;
     private List<Employee> employees;
+    
+    private DatastoreSingleton() {
+        
+        // Try to open logins, items, and employees from files
+        logins = (List<Login>) openObject(LOGIN_FILENAME);
+        items = (List<Item>) openObject(ITEM_FILENAME);
+        employees = (List<Employee>) openObject(EMPL_FILENAME);
+        
+        // Initializing logins if they weren't found on disk
+        if (logins == null) {
+            logins = new ArrayList<>();
+            // Adding some logins
+            logins.add(new Login("admin", "admin", "admin@admin.com", LocalDate.of(2011, Month.JUNE, 16)));
+            logins.add(new Login("guest", "guest", "guest@guest.com", LocalDate.of(2015, Month.APRIL, 24)));
+            logins.add(new Login("user1", "user1", "user1@user1.com", LocalDate.of(2014, Month.OCTOBER, 1)));
+            logins.add(new Login("user2", "user2", "user2@user2.com", LocalDate.of(2015, Month.NOVEMBER, 28)));
+            // saving file
+            saveObject(LOGIN_FILENAME, logins);
+        }
+        
+        // Initializing employees, even if they weren't found on disk
+        Employee empCNickel = new Employee("Christian", "Nickel", Department.IT);
+        Employee empDRivers = new Employee("Denise", "Rivers", Department.IT);
+        Employee empMThompson = new Employee("Matt", "Thompson", Department.IT);
+        Employee empJPoage = new Employee("Jacob", "Poage", Department.IT);
+        if (employees == null) {
+            employees = new ArrayList<>();
+            // Adding some employees
+            employees.add(empCNickel);
+            employees.add(empDRivers);
+            employees.add(empMThompson);
+            employees.add(empJPoage);
+            // saving file
+            saveObject(EMPL_FILENAME, employees);
+        }
+        
+        // Initializing items if they werent found on disk
+        if (items == null) {
+            items = new ArrayList<>();
+            // Adding some items
+            items.add(new Item(Item.Type.LAPTOP, "ASUS", "Chromebook", 
+                    "Silver laptop/ultrabook "
+                    + "that runs the Chrome OS."
+                    + "Used for simple web browsing and testing of pages. Very stable but not recommended as a development "
+                    + "or word processing machine", 
+                    "2037196127371421571", "On a desk", empCNickel, 
+                    Department.IT));
+            items.add(new Item(Item.Type.LAPTOP, "Dell", "Latitude E6530", "", 
+                    "2037196127371421573", "On a desk", empDRivers, 
+                    Department.IT));
+            items.add(new Item(Item.Type.LAPTOP, "Dell", "22 inch Monitor", "", 
+                    "20371444441421573", "On a few desks", empJPoage, 
+                    Department.IT));
+            items.add(new Item(Item.Type.LAPTOP, "Dell", "WebCam", "", 
+                    "212323155177142341", "On a few desks", empMThompson, 
+                    Department.IT));
+            items.add(new Item(Item.Type.LAPTOP, "Logitech", "Ergo Mouse", "", 
+                    "83498200394879028", "Somewhere", null, 
+                    Department.NONE));
+            items.add(new Item(Item.Type.LAPTOP, "Apple", "Macbook", "", 
+                    "94529834759234741", "Somewhere", null, 
+                    Department.ACCOUNTING));
+            // saving file
+            saveObject(ITEM_FILENAME, items);
+        } else {
+            // Setting the last ID to create new items
+            int lastId = 0;
+            for(Item item : items) {
+                if (item.getId() > lastId) {
+                    lastId = item.getId();
+                }
+            }
+            Item.setLastId(lastId);
+        }
+		
+    }
+
+    private static void saveObject(String fileName, Object obj) {
+
+        // Serialize
+        try {
+                FileOutputStream fileOut = new FileOutputStream("webapps/" + fileName);
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(obj);
+                out.close();
+                fileOut.close();
+
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+    }
+
+    private static Object openObject(String fileName) {
+        
+        Object data = null;
+        
+        // deserialize
+        try {
+                FileInputStream fileIn = new FileInputStream("webapps/" + fileName);
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                data = in.readObject();
+                in.close();
+                fileIn.close();
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+
+        return data;
+    }
+    
     
     public static DatastoreSingleton getInstance() {
         return DatastoreSingletonHolder.INSTANCE;
@@ -96,9 +159,42 @@ public class DatastoreSingleton {
         private static final DatastoreSingleton INSTANCE = new DatastoreSingleton();
     }
     
+    public static List<Employee> getAllEmployees() {
+        return getInstance().employees;
+    }
     
     public static List<Login> getAllLogins() {
         return getInstance().logins;
+    }
+
+    public static void deleteItem(Item item) {
+        int index = -1;
+        for(int i=0; i < getInstance().items.size(); i++) {
+            if (getInstance().items.get(i).getId() == item.getId()) {
+                index = i;
+                break;
+            }
+        }
+        if (index > -1) {
+            getInstance().items.remove(index);
+            // saving file
+            getInstance().saveObject(ITEM_FILENAME, getInstance().items);
+        }
+    }
+
+    public static void setUpdatedItem(Item newItem) {
+        int index = -1;
+        for(int i=0; i < getInstance().items.size(); i++) {
+            if (getInstance().items.get(i).getId() == newItem.getId()) {
+                index = i;
+                break;
+            }
+        }
+        if (index > -1) {
+            getInstance().items.set(index, newItem);
+            // saving file
+            getInstance().saveObject(ITEM_FILENAME, getInstance().items);
+        }
     }
     
     public static Item getItemByID(int id) {
@@ -106,7 +202,13 @@ public class DatastoreSingleton {
         Optional<Item> result = getInstance().items.stream()
             .filter(a -> ( a.getId() == id ))
              .findFirst();
-        return result.get();
+        Item found = null;
+        try {
+            found = result.get();
+        } catch (NoSuchElementException ex) {
+            // Do nothing
+        }
+        return found;
     }
     
     
@@ -122,20 +224,20 @@ public class DatastoreSingleton {
             return null;
         }
         if (toIndex > size) {
-            toIndex = size-1;
+            toIndex = size;
         }
         return getInstance().items.subList(offset, toIndex);
     }
     
     public static List<Item> searchItems(String term) {
-        
+        String searchTerm = term.toLowerCase();
         List<Item> result = getInstance().items.stream()
             .filter(a -> (
-                        a.getMake().contains(term) ||
-                        a.getModel().contains(term) ||
-                        a.getDescription().contains(term) ||
-                        a.getSerialNumber().contains(term) ||
-                        a.getLocation().contains(term)
+                        a.getMake().toLowerCase().contains(searchTerm) ||
+                        a.getModel().toLowerCase().contains(searchTerm) ||
+                        a.getDescription().toLowerCase().contains(searchTerm) ||
+                        a.getSerialNumber().toLowerCase().contains(searchTerm) ||
+                        a.getLocation().toLowerCase().contains(searchTerm)
                     ))
             .collect(Collectors.toList());
         return result;
@@ -162,6 +264,9 @@ public class DatastoreSingleton {
     
     public static List<Item> getLatestItems(int count) {
         List<Item> allItems = getInstance().items;
+        if (allItems.size() <= count) {
+            return allItems;
+        }
         Collections.sort(allItems, (Item i1, Item i2) -> i1.getDateEntered().compareTo(i2.getDateEntered()));
         if (count < allItems.size()) {
             allItems = allItems.subList(0, count-1);
@@ -215,6 +320,8 @@ public class DatastoreSingleton {
                 throw new InvalidLoginException();
             }
         }
+        // saving file
+        getInstance().saveObject(LOGIN_FILENAME, getInstance().logins);
         return found;
     }
     
@@ -228,9 +335,7 @@ public class DatastoreSingleton {
     
     public static void addItem(Item item) {
         getInstance().items.add(item);
-    }
-    
-    public static void removeItem(Item item) {
-        getInstance().items.remove(item);
+        // saving file
+        getInstance().saveObject(ITEM_FILENAME, getInstance().items);
     }
 }

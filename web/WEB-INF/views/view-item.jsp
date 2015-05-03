@@ -12,19 +12,19 @@
 
 <t:body-container title="Track IT - View Item">
     
-    <t:nav-bar iconClass="glyphicon glyphicon-home" username="${username}" />
+    <t:nav-bar iconClass="glyphicon glyphicon-home" />
     
-    <ol class="breadcrumb">
+    <ol class="container breadcrumb">
         <li><a href="${cp}/home">Home</a></li>
         <li><a href="${cp}/inventory">Inventory</a></li>
         <li class="active">View Item #${item.id}</li>
     </ol>
 
-    <div class="container-fluid">
+    <div class="container">
         <h3>View Inventory Item</h3>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
 
         <div class="col-md-1"></div>
 
@@ -93,11 +93,11 @@
                 </div>
                 
                 <div class="col-md-2 view-heading">
-                    <strong>Quantity:</strong>
+                    <strong>Owner:</strong>
                 </div>
                 
-                <div class="col-md-5">
-                    ${item.quantity}
+                <div class="col-md-3">
+                    ${item.owner}
                 </div>
                 
             </div>
@@ -117,20 +117,12 @@
                 </div>
                 
                 <div class="col-md-5">
-                    ${item.point_of_contact}
+                    ${item.pointOfContact}
                 </div>
                 
             </div>
             
             <div class="row">
-                
-                <div class="col-md-2 view-heading">
-                    <strong>Made:</strong>
-                </div>
-                
-                <div class="col-md-3">
-                    ${item.made}
-                </div>
                 
                 <div class="col-md-2 view-heading">
                     <strong>Entered:</strong>
@@ -154,6 +146,8 @@
                 <a class="btn btn-warning" href="${cp}/inventory/delete/${item.id}">Delete Item</a>
                 &nbsp;&nbsp;
                 <a class="btn btn-default" href="${cp}/inventory">View Inventory</a>
+                &nbsp;&nbsp;
+                <a class="btn btn-success" href="${cp}/inventory/new">Create Item</a>
             </div>
             
         </div>

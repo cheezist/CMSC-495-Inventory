@@ -9,6 +9,7 @@ import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
 import edu.umuc.cmsc495.trackit.models.Item;
 import edu.umuc.cmsc495.trackit.models.Login;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework. stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +21,20 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/inventory")
-public class InventoryController {
+public class InventoryController extends AbstractApplicationController {
     
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public String inventory(
+            HttpSession session,
             @RequestParam(value = "term", defaultValue = "") String term, 
             @RequestParam(value = "offset", defaultValue = "0") int offset, 
             @RequestParam(value = "rowcount", defaultValue = "10") int rowcount, 
             ModelMap map) {
+        
+        // valid session check.. there must be a better way of doing this
+        if (!this.checkUserLogin(session)) {
+            return "redirect:login?msg=invalid_session";
+        }
         
         // Getting counts so we can get the number of pages
         int total;

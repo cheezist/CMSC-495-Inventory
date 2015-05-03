@@ -12,14 +12,14 @@
 
 <t:body-container title="Track IT - Inventory">
     
-    <t:nav-bar iconClass="glyphicon glyphicon-home" username="${username}" />
+    <t:nav-bar iconClass="glyphicon glyphicon-home" />
     
-    <ol class="breadcrumb">
+    <ol class="container breadcrumb">
         <li><a href="${cp}/home">Home</a></li>
         <li class="active">Inventory</li>
     </ol>
 
-    <div class="container-fluid">
+    <div class="container">
         
         <h3>Inventory</h3>
 
@@ -74,8 +74,8 @@
                         <th>Make</th>
                         <th>Model</th>
                         <th>Serial Number</th>
-                        <th>Date</th>
-                        <th>Quantity</th>
+                        <th>Date Entered</th>
+                        <th>Date Updated</th>
                     </tr>                
                     <c:forEach items="${items}" var="item" varStatus="status">
                     <tr>
@@ -90,16 +90,24 @@
                         <td>${item.make}</td>
                         <td>${item.model}</td>
                         <td>${item.serialNumber}</td>
-                    <fmt:parseDate value="${item.made}"
-                                   pattern="yyyy-MM-dd"
-                                   var="parsedDate"
-                                   type="date" />
-                        <fmt:formatDate value="${parsedDate}" 
-                                        var="madeFormatted"  
+                        <fmt:parseDate value="${item.dateEntered}"
+                                       pattern="yyyy-MM-dd"
+                                       var="parsedEntered"
+                                       type="date" />
+                        <fmt:formatDate value="${parsedEntered}" 
+                                        var="enteredFormatted"  
                                         type="date" 
                                         pattern="MM/dd/yyyy" />
-                        <td>${madeFormatted}</td>
-                        <td>${item.quantity}</td>
+                        <td>${enteredFormatted}</td>
+                        <fmt:parseDate value="${item.dateModified}"
+                                       pattern="yyyy-MM-dd"
+                                       var="parsedModified"
+                                       type="date" />
+                        <fmt:formatDate value="${parsedModified}" 
+                                        var="modifiedFormatted"  
+                                        type="date" 
+                                        pattern="MM/dd/yyyy" />
+                        <td>${modifiedFormatted}</td>
                     </tr>
                     </c:forEach>
                 </table>
