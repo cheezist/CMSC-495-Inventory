@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.controllers;
 
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
@@ -10,7 +5,6 @@ import edu.umuc.cmsc495.trackit.models.Department;
 import edu.umuc.cmsc495.trackit.models.Employee;
 import edu.umuc.cmsc495.trackit.models.Item;
 import edu.umuc.cmsc495.trackit.models.Login;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,9 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 /**
- *
- * @author Matthew
+ * Controller reports, maps to /reports, ability to respond to GET requests.
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping("/reports")

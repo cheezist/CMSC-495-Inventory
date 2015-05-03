@@ -8,10 +8,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;  
 import org.springframework.web.servlet.view.UrlBasedViewResolver;  
-import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+
 /**
  * Scans all classes under edu.umuc.cmsc495.trackit for controllers
- * @author Christian
+ * @author CMSC 495 Web Inventory Team
  */
   
 @Configuration

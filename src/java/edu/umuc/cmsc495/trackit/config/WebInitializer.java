@@ -8,6 +8,10 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;  
 import org.springframework.web.servlet.DispatcherServlet;  
   
+/**
+ * Initializes the application, setting the / as the root context
+ * @author CMSC 495 Web Inventory Team
+ */
 public class WebInitializer implements WebApplicationInitializer {
     
     @Override

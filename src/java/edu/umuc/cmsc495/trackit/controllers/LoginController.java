@@ -4,20 +4,17 @@ import edu.umuc.cmsc495.trackit.exceptions.InvalidLoginException;
 import edu.umuc.cmsc495.trackit.exceptions.LockedAccountException;
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
 import edu.umuc.cmsc495.trackit.models.Login;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
- * Represents the login view
- * @author Christian
+ * Controller logging in, maps to / and /login, ability to respond to GET and
+ * POST requests.
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping({"/", "/login"})

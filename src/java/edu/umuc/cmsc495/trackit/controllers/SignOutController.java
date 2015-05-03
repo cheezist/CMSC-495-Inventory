@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
- * @author Christian
+ * Controller for signing out, maps to /sign-out, ability to respond to GET requests.
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping({"/sign-out"})

@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.controllers;
 
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
 import edu.umuc.cmsc495.trackit.models.Item;
-import edu.umuc.cmsc495.trackit.models.Login;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework. stereotype.Controller;
@@ -15,9 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 /**
- *
- * @author Matthew
+ * Controller for viewing the inventory, maps to /inventory with
+ * the ability to search, and change pages using an offset and rowcount
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping("/inventory")

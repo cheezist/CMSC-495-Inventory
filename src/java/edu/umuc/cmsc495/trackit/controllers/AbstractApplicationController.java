@@ -5,8 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 
 /**
- *
- * @author Christian
+ * Abstract controller meant to be used for utility functions
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 public abstract class AbstractApplicationController {

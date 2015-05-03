@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.controllers;
 
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
@@ -15,8 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 /**
- *
- * @author Matthew
+ * Controller for deleting an inventory item, maps to /inventory/delete/{id} with
+ * separate methods for POST and GET requests
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping("/inventory/delete")

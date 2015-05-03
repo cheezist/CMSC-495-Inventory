@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.controllers;
 
 import edu.umuc.cmsc495.trackit.models.DatastoreSingleton;
@@ -19,9 +14,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 /**
- *
- * @author Matthew
+ * Controller for creating a new inventory item, maps to /inventory/new with
+ * separate methods for POST and GET requests
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping("/inventory/new")

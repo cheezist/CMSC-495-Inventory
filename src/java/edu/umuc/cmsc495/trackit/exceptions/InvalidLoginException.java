@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.exceptions;
 
 /**
- *
- * @author Christian
+ * Exception for invalid logins.
+ * @author CMSC 495 Web Inventory Team
  */
 public class InvalidLoginException extends Exception {
 

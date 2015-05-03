@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
+ * Controller for the home page, maps to /home. The single method maps to the
+ * GET request and returns some information about logins and latest items.
  * @author CMSC 495 Web Inventory Team
  */
 @Controller

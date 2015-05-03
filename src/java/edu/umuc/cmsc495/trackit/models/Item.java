@@ -2,10 +2,14 @@ package edu.umuc.cmsc495.trackit.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * POJO for the Item.
+ * @author CMSC 495 Web Inventory Team
+ */
 public class Item implements Serializable  {
     
     /**
-     *
+     * Enum for the Type of item
      */
     public enum Type {TOWER, MONITOR, LAPTOP, PRINTER, ACCESSORY, OTHER }
     

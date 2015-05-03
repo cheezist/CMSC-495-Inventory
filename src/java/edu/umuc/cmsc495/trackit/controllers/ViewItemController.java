@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
- * @author Matthew
+ * Controller for viewing an inventory item, maps to /inventory/view/{id}
+ * @author CMSC 495 Web Inventory Team
  */
 @Controller
 @RequestMapping("/inventory/view")

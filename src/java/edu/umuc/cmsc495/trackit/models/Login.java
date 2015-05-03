@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- *
- * @author Christian
+ * POJO for the Login.
+ * @author CMSC 495 Web Inventory Team
  */
 public class Login implements Serializable {
     

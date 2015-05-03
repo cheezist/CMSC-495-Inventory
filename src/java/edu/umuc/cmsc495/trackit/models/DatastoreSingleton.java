@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * Used to store all data, every set method should write to disk.
- * @author Jacob Poage, Matthew Thompson, Denise Rivers, Christian Nickel
+ * @author CMSC 495 Web Inventory Team
  */
 public class DatastoreSingleton {
     
@@ -34,6 +34,11 @@ public class DatastoreSingleton {
     private List<Item> items;
     private List<Employee> employees;
     
+    /**
+     * Constructor for the singleton, attempts to load data from files saved
+     * on disk, if unable it will create sample data and save it. Initializes
+     * collections of logins, items, and employees.
+     */
     private DatastoreSingleton() {
         
         // Try to open logins, items, and employees from files
@@ -110,6 +115,11 @@ public class DatastoreSingleton {
 		
     }
 
+    /**
+     * Serializes and saves an object to disk at webapps/ using the filename
+     * @param fileName
+     * @param obj 
+     */
     private static void saveObject(String fileName, Object obj) {
 
         // Serialize
@@ -127,6 +137,11 @@ public class DatastoreSingleton {
         }
     }
 
+    /**
+     * Opens a file and deserializes it from disk.
+     * @param fileName
+     * @return 
+     */
     private static Object openObject(String fileName) {
         
         Object data = null;
@@ -149,24 +164,39 @@ public class DatastoreSingleton {
         return data;
     }
     
-    
+    /**
+     * This public static method creates the singleton, there can only be one
+     * instance of this object.
+     * @return 
+     */
     public static DatastoreSingleton getInstance() {
         return DatastoreSingletonHolder.INSTANCE;
     }
-    
     
     private static class DatastoreSingletonHolder {
         private static final DatastoreSingleton INSTANCE = new DatastoreSingleton();
     }
     
+    /**
+     * Gets every employee
+     * @return List of employees
+     */
     public static List<Employee> getAllEmployees() {
         return getInstance().employees;
     }
     
+    /**
+     * Returns all logins
+     * @return 
+     */
     public static List<Login> getAllLogins() {
         return getInstance().logins;
     }
 
+    /**
+     * Deletes an item from the singleton
+     * @param item 
+     */
     public static void deleteItem(Item item) {
         int index = -1;
         for(int i=0; i < getInstance().items.size(); i++) {
@@ -182,6 +212,10 @@ public class DatastoreSingleton {
         }
     }
 
+    /**
+     * Updates the singleton collection of item
+     * @param newItem 
+     */
     public static void setUpdatedItem(Item newItem) {
         int index = -1;
         for(int i=0; i < getInstance().items.size(); i++) {
@@ -197,6 +231,11 @@ public class DatastoreSingleton {
         }
     }
     
+    /**
+     * Finds a particular item by its ID
+     * @param id
+     * @return 
+     */
     public static Item getItemByID(int id) {
         
         Optional<Item> result = getInstance().items.stream()
@@ -211,12 +250,21 @@ public class DatastoreSingleton {
         return found;
     }
     
-    
+    /**
+     * Gets all items
+     * @return 
+     */
     public static List<Item> getAllItems() {
         return getInstance().items;
     }
     
     
+    /**
+     * Gets a list of items using offset and rowcount for pagination
+     * @param offset
+     * @param rowcount
+     * @return 
+     */
     public static List<Item> getItems(int offset, int rowcount) {
         int size = getInstance().items.size();
         int toIndex = (offset + rowcount);
@@ -229,6 +277,11 @@ public class DatastoreSingleton {
         return getInstance().items.subList(offset, toIndex);
     }
     
+    /**
+     * Gets a list of items found by a search term.
+     * @param term
+     * @return 
+     */
     public static List<Item> searchItems(String term) {
         String searchTerm = term.toLowerCase();
         List<Item> result = getInstance().items.stream()
@@ -243,7 +296,13 @@ public class DatastoreSingleton {
         return result;
     }
     
-    
+    /**
+     * SUses search term, and pagination to return records
+     * @param term
+     * @param offset
+     * @param rowcount
+     * @return 
+     */
     public static List<Item> searchItems(String term, int offset, int rowcount) {
         List<Item> result = searchItems(term);
         int size = result.size();
@@ -261,7 +320,11 @@ public class DatastoreSingleton {
         }
     }
     
-    
+    /**
+     * Gets the latest items, up to a specific number, limited by a count
+     * @param count
+     * @return 
+     */
     public static List<Item> getLatestItems(int count) {
         List<Item> allItems = getInstance().items;
         if (allItems.size() <= count) {
@@ -274,6 +337,14 @@ public class DatastoreSingleton {
         return allItems;
     }
     
+    /**
+     * Gets a Login by username and password
+     * @param username
+     * @param password
+     * @return 
+     * @throws LockedAccountException If the account was locked
+     * @throws InvalidLoginException If the login attempt was invalid
+     */
     public static Login getLoginByCredentials(String username, String password) 
             throws LockedAccountException, InvalidLoginException {
         Login found = null;
@@ -325,14 +396,26 @@ public class DatastoreSingleton {
         return found;
     }
     
+    /**
+     * Adds a new login
+     * @param login 
+     */
     public static void addLogin(Login login) {
         getInstance().logins.add(login);
     }
     
+    /**
+     * Removes a login
+     * @param login 
+     */
     public static void removeLogin(Login login) {
         getInstance().logins.remove(login);
     }
     
+    /**
+     * Adds an item
+     * @param item 
+     */
     public static void addItem(Item item) {
         getInstance().items.add(item);
         // saving file

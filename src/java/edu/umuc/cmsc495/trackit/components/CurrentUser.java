@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.umuc.cmsc495.trackit.components;
 
 import edu.umuc.cmsc495.trackit.models.Login;
@@ -10,8 +5,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author Christian
+ *  Used for the session state
+ * @author CMSC 495 Web Inventory Team
  */
 @Component
 @Scope("session")

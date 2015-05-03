@@ -2,6 +2,10 @@ package edu.umuc.cmsc495.trackit.models;
 
 import java.io.Serializable;
 
+/**
+ * POJO for the Employee.
+ * @author CMSC 495 Web Inventory Team
+ */
 public class Employee implements Serializable {
     
     private static int lastId = 0;
