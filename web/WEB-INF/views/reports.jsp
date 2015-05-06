@@ -13,6 +13,11 @@
     
     <t:nav-bar iconClass="glyphicon glyphicon-home" />
     
+    <ol class="container breadcrumb">
+        <li><a href="${cp}/home">Home</a></li>
+        <li class="active">Reports</li>
+    </ol>
+    
     <div class='container'>
         
         <h3>Reports</h3>

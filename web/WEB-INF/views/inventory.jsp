@@ -115,7 +115,6 @@
             </div>
 
             <c:if test="${pages > 1}">
-                ${pages} pages
             <nav>
                 <ul class="pagination">
                   <li>
