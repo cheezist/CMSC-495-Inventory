@@ -330,11 +330,19 @@ public class DatastoreSingleton {
         if (allItems.size() <= count) {
             return allItems;
         }
-        Collections.sort(allItems, (Item i1, Item i2) -> i1.getDateEntered().compareTo(i2.getDateEntered()));
+        Collections
+                .sort(allItems, (Item i1, Item i2) -> compareDateEntered(i1, i2));
         if (count < allItems.size()) {
             allItems = allItems.subList(0, count-1);
         }
         return allItems;
+    }
+    
+    private static int compareDateEntered(Item i1, Item i2) {
+        if (i1.getDateEntered() != null && i2.getDateEntered() != null) {
+            return i1.getDateEntered().compareTo(i2.getDateEntered());
+        }
+        return 0;
     }
     
     /**
